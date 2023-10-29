@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RandomReader:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RandomReader_jar</output-path>
+    <root id="archive" name="RandomReader.jar">
+      <element id="module-output" name="RandomReader" />
+    </root>
+  </artifact>
+</component>

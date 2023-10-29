@@ -43,39 +43,24 @@ public class Main {
         labelDisplay(container,"OnePunch",180);
         labelDisplay(container,"Mashle",320);
 
-        handleFirstButton(container,40,BerserkFirstUrl);
-        handleLastButton(container,40,BerserkLastUrl);
+        handleButton(container,40,100,BerserkFirstUrl);
+        handleButton(container,40,150,BerserkLastUrl);
         handleRandomButton(container,40,BerserkRandomUrl,374);
 
-        handleFirstButton(container,180,OnePunchFirstUrl);
-        handleLastButton(container,180,OnePunchLastUrl);
+        handleButton(container,180,100,OnePunchFirstUrl);
+        handleButton(container,180,150,OnePunchLastUrl);
         handleRandomButton(container,180,OnePunchRandomUrl,194);
 
-        handleFirstButton(container,320,MashleFirstUrl);
-        handleLastButton(container,320,MashleLastUrl);
+        handleButton(container,320,100,MashleFirstUrl);
+        handleButton(container,320,150,MashleLastUrl);
         handleRandomButton(container,320,MashleRandomUrl,162);
 
         jFrame.setVisible(true);
-
     }
 
-    private static void handleFirstButton(Container container, int x, String Url) {
+    private static void handleButton(Container container, int x, int y, String Url) {
         JButton button = new JButton("First");
-        jButton(button,x,100);
-        container.add(button);
-
-        button.addActionListener(e -> {
-            try {
-                Desktop.getDesktop().browse(URI.create(Url));
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-    }
-
-    private static void handleLastButton(Container container, int x, String Url) {
-        JButton button = new JButton("Last");
-        jButton(button,x,150);
+        jButton(button,x,y);
         container.add(button);
 
         button.addActionListener(e -> {
