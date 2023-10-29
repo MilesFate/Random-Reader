@@ -27,39 +27,46 @@ public class Main {
         ImageIcon img = new ImageIcon("src/main/java/com/shyly/icon/IMG_2348.JPG");
         jFrame.setIconImage(img.getImage());
 
+        Color background = new Color(255, 225, 204);
+        Color foreground = new Color(153, 0, 76);
+        Color onepunchColour = new Color(255, 128, 0);
+        Color mashleColour = new Color(153, 51, 225);
+
         jFrame.setBounds(300, 90, 470, 300);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container = jFrame.getContentPane();
+        jFrame.getContentPane().setBackground(background);
         jFrame.setResizable(false);
         container.setLayout(null);
 
         JLabel opener = new JLabel("Pick Random Manga");
         opener.setFont(new Font("Arial", Font.BOLD, 15));
+        opener.setForeground(foreground);
         opener.setSize(190, 20);
-        opener.setLocation(1, 10);
+        opener.setLocation(150, 10);
         container.add(opener);
 
-        labelDisplay(container,"Berserk",40);
-        labelDisplay(container,"OnePunch",180);
-        labelDisplay(container,"Mashle",320);
+        labelDisplay(container,Color.BLACK,"Berserk",40);
+        labelDisplay(container,onepunchColour,"OnePunch",180);
+        labelDisplay(container,mashleColour,"Mashle",320);
 
-        handleButton(container,40,100,BerserkFirstUrl);
-        handleButton(container,40,150,BerserkLastUrl);
+        handleButton(container,"First",40,100,BerserkFirstUrl);
+        handleButton(container,"Last",40,150,BerserkLastUrl);
         handleRandomButton(container,40,BerserkRandomUrl,374);
 
-        handleButton(container,180,100,OnePunchFirstUrl);
-        handleButton(container,180,150,OnePunchLastUrl);
+        handleButton(container,"First",180,100,OnePunchFirstUrl);
+        handleButton(container,"Last",180,150,OnePunchLastUrl);
         handleRandomButton(container,180,OnePunchRandomUrl,194);
 
-        handleButton(container,320,100,MashleFirstUrl);
-        handleButton(container,320,150,MashleLastUrl);
+        handleButton(container,"First",320,100,MashleFirstUrl);
+        handleButton(container,"Last",320,150,MashleLastUrl);
         handleRandomButton(container,320,MashleRandomUrl,162);
 
         jFrame.setVisible(true);
     }
 
-    private static void handleButton(Container container, int x, int y, String Url) {
-        JButton button = new JButton("First");
+    private static void handleButton(Container container,String type, int x, int y, String Url) {
+        JButton button = new JButton(type);
         jButton(button,x,y);
         container.add(button);
 
@@ -89,17 +96,18 @@ public class Main {
         });
     }
 
-    private static void labelDisplay(Container container, String name, int x){
+    private static void labelDisplay(Container container,Color colour, String name, int x){
         JLabel label = new JLabel(name);
         label.setFont(new Font("Arial", Font.BOLD, 15));
         label.setSize(90, 20);
+        label.setForeground(colour);
         label.setLocation(x, 50);
         container.add(label);
     }
 
     private static void jButton(JButton button, int x, int y){
-        button.setFont(new Font("Arial", Font.PLAIN, 15));
-        button.setSize(100, 20);
+        button.setFont(new Font("Arial", Font.PLAIN, 16));
+        button.setSize(100, 40);
         button.setLocation(x, y);
     }
 }
