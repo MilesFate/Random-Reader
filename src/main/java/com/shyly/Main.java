@@ -69,7 +69,11 @@ public class Main {
 
     public static void playSong(Container container){
         try {
-            String musicLocation = "src/main/resources/music/Stolas Speaks (mp3cut.net).wav";
+            // This is not mine, this is from helluva boss
+            // https://www.youtube.com/@SpindleHorse
+            // https://www.patreon.com/VivienneMedrano
+            // its good show watch it
+            String musicLocation = "src/main/resources/music/Stolas Speaks.wav";
 
             File musicPath = new File(musicLocation);
             if(musicPath.exists()){
