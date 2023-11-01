@@ -1,30 +1,31 @@
 package com.shyly;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Random;
 
 public class Main {
+    private static final String BerserkFirstUrl = "https://readberserk.com/chapter/berserk-chapter-a0/";
+    private static final String BerserkLastUrl = "https://readberserk.com/chapter/berserk-chapter-374/";
+    private static final String BerserkRandomUrl = "https://readberserk.com/chapter/berserk-chapter-";
+    private static final String OnePunchFirstUrl = "https://chapmanganato.com/manga-wd951838/chapter-1";
+    private static final String OnePunchLastUrl = "https://chapmanganato.com/manga-wd951838/chapter-194";
+    private static final String OnePunchRandomUrl = "https://chapmanganato.com/manga-wd951838/chapter-";
+    private static final String MashleFirstUrl = "https://chapmanganato.com/manga-hu985203/chapter-1";
+    private static final String MashleLastUrl = "https://chapmanganato.com/manga-hu985203/chapter-162/";
+    private static final String MashleRandomUrl = "https://chapmanganato.com/manga-hu985203/chapter-";
     public static void main(String[] args) {
-        String BerserkFirstUrl = "https://readberserk.com/chapter/berserk-chapter-a0/";
-        String BerserkLastUrl = "https://readberserk.com/chapter/berserk-chapter-374/";
-        String BerserkRandomUrl = "https://readberserk.com/chapter/berserk-chapter-";
-
-        String OnePunchFirstUrl = "https://chapmanganato.com/manga-wd951838/chapter-1";
-        String OnePunchLastUrl = "https://chapmanganato.com/manga-wd951838/chapter-194";
-        String OnePunchRandomUrl = "https://chapmanganato.com/manga-wd951838/chapter-";
-
-        String MashleFirstUrl = "https://chapmanganato.com/manga-hu985203/chapter-1";
-        String MashleLastUrl = "https://chapmanganato.com/manga-hu985203/chapter-162/";
-        String MashleRandomUrl = "https://chapmanganato.com/manga-hu985203/chapter-";
-
         JFrame jFrame = new JFrame();
         Container container;
 
         jFrame.setTitle("Random Reader");
-        ImageIcon img = new ImageIcon("src/main/java/com/shyly/icon/IMG_2348.JPG");
+        ImageIcon img = new ImageIcon("src/main/resources/icon/IMG_2348.JPG");
         jFrame.setIconImage(img.getImage());
 
         Color background = new Color(255, 225, 204);
@@ -62,7 +63,47 @@ public class Main {
         handleButton(container,"Last",320,150,MashleLastUrl);
         handleRandomButton(container,320,MashleRandomUrl,162);
 
+        playSong(container);
         jFrame.setVisible(true);
+    }
+
+    public static void playSong(Container container){
+        try {
+            String musicLocation = "src/main/resources/music/Stolas Speaks (mp3cut.net).wav";
+
+            File musicPath = new File(musicLocation);
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+
+                musicButton(container, clip);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void musicButton(Container container, Clip clip) {
+        var ref = new Object() {
+            int musicStatus = 0;
+        };
+
+        JButton button = new JButton("music");
+        button.setFont(new Font("Arial", Font.PLAIN, 16));
+        button.setSize(80, 30);
+        button.setLocation(350, 10);
+        container.add(button);
+
+        button.addActionListener(e -> {
+            if(ref.musicStatus == 1){
+                ref.musicStatus = 0;
+                clip.stop();
+            }else{
+                ref.musicStatus = 1;
+                clip.start();
+            }
+        });
     }
 
     private static void handleButton(Container container,String type, int x, int y, String Url) {
